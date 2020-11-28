@@ -5,8 +5,7 @@ lines = data.split('\n')
 ans = 0
 for line in lines:
     seen = {}
-    has_2aa = False
-    has_aba = False
+    has_2aa = has_aba = False
     prevprev = prev = ''
     for i, char in enumerate(line):
         if char == prevprev:
