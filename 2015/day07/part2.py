@@ -24,7 +24,7 @@ def get_signal(dst):
         else:
             return sig1 >> sig2
 
-lines = [x.split(' ') for x in data.split('\n')]
+lines = [x.split() for x in data.split('\n')]
 sources = {x[-1]: x[:-2] for x in lines}
 part1 = get_signal('a')
 sources['b'] = [f'{part1}']
