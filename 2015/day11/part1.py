@@ -29,7 +29,7 @@ def increment(seq):
             break
     seq.reverse()
 
-def get_new_pw(old_pw):
+def new_pw(old_pw):
     seq = list(old_pw)
     while True:
         increment(seq)
@@ -37,4 +37,4 @@ def get_new_pw(old_pw):
             break
     return ''.join(seq)
 
-print(get_new_pw(data))
+print(new_pw(data))

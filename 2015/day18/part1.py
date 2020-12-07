@@ -10,21 +10,21 @@ class Lights:
             for c in range(100):
                 self.grid[r][c] = 1 if t0_state[r][c] == '#' else 0
 
-    def get_state(self, r, c):
+    def state(self, r, c):
         if 0 <= r < 100 and 0 <= c < 100:
             return self.grid[r][c]
         return 0
 
-    def count_on_neighbors(self, r, c):
+    def lit_neighbors(self, r, c):
         n = 0
         for dr in (-1, 0, 1):
             for dc in (-1, 0, 1):
                 if not dr == dc == 0:
-                    n += self.get_state(r + dr, c + dc)
+                    n += self.state(r + dr, c + dc)
         return n
 
-    def calculate_next_state(self, r, c):
-        n = self.count_on_neighbors(r, c)
+    def next_state(self, r, c):
+        n = self.lit_neighbors(r, c)
         if self.grid[r][c] == 1:
             if n in (2, 3):
                 return 1
@@ -37,7 +37,7 @@ class Lights:
     def animate(self):
         for r in range(100):
             for c in range(100):
-                self.temp[r][c] = self.calculate_next_state(r, c)
+                self.temp[r][c] = self.next_state(r, c)
         self.grid, self.temp = self.temp, self.grid
 
 def main():

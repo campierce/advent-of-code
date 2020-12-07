@@ -12,7 +12,7 @@ def permutations(length, total):
             for permu in permutations(length - 1, total - n):
                 yield (n,) + permu
 
-def get_score(permu):
+def score(permu):
     cals = [props[i][4] * permu[i] for i in range(4)]
     if sum(cals) != 500:
         return float('-inf')
@@ -24,5 +24,5 @@ def get_score(permu):
 
 ans = float('-inf')
 for permu in permutations(4, 100):
-    ans = max(ans, get_score(permu))
+    ans = max(ans, score(permu))
 print(ans)

@@ -23,8 +23,6 @@ def dictify(arr):
 
 def is_modified_subset(chk):
     for k, v in chk.items():
-        if k not in ref:
-            return False
         if k in ('cats', 'trees'):
             if v <= ref[k]:
                 return False

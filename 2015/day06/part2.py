@@ -1,18 +1,15 @@
+import numpy as np
+import re
 from aocd import get_data
 data = get_data(year=2015, day=6)
 
-lines = [x.split() for x in data.split('\n')]
-grid = [[0 for _ in range(1000)] for _ in range(1000)]
+lines = data.split('\n')
+array = np.zeros((1000, 1000), dtype=int)
+state = {'off': -1, 'on': 1, 'toggle': 2}
 for line in lines:
-    action = line[-4]
-    r0, c0 = [int(x) for x in line[-3].split(',')]
-    r1, c1 = [int(x) for x in line[-1].split(',')]
-    for r in range(r0, r1 + 1):
-        for c in range(c0, c1 + 1):
-            if action == 'on':
-                grid[r][c] += 1
-            elif action == 'off':
-                grid[r][c] = max(grid[r][c] - 1, 0)
-            else:
-                grid[r][c] += 2
-print(sum(map(sum, grid)))
+    m = re.search('(\w+) (\d+),(\d+) through (\d+),(\d+)', line)
+    op, r0, c0, r1, c1 = m.groups()
+    sr, sc = slice(int(r0), int(r1) + 1), slice(int(c0), int(c1) + 1)
+    array[sr, sc] += state[op]
+    array[array < 0] = 0
+print(array.sum())
