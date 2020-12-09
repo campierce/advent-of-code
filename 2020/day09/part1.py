@@ -2,10 +2,11 @@ from itertools import combinations
 from aocd import get_data
 data = get_data(year=2020, day=9)
 
-lines = [int(x) for x in data.split('\n')]
+PRE = 25
+nums = [int(x) for x in data.split('\n')]
 
-for i in range(25, len(lines)):
-    seen = set([x + y for x, y in list(combinations(lines[i-25:i], 2))])
-    if lines[i] not in seen:
-        print(lines[i])
+for i in range(PRE, len(nums)):
+    seen = set([x + y for x, y in list(combinations(nums[i-25:i], 2))])
+    if nums[i] not in seen:
+        print(nums[i])
         break

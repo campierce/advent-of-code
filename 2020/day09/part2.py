@@ -2,15 +2,16 @@ from itertools import combinations
 from aocd import get_data
 data = get_data(year=2020, day=9)
 
-lines = [int(x) for x in data.split('\n')]
+P1 = 36845998
+nums = [int(x) for x in data.split('\n')]
 
 total = left = 0
-for i, n in enumerate(lines):
+for i, n in enumerate(nums):
     total += n
-    while total > 36845998:
-        total -= lines[left]
+    while total > P1:
+        total -= nums[left]
         left += 1
-    if total == 36845998:
-        arr = lines[left:i+1]
-        print(min(arr) + max(arr))
+    if total == P1:
+        subarr = nums[left:i+1]
+        print(min(subarr) + max(subarr))
         break
