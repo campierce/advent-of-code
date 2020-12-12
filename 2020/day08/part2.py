@@ -8,7 +8,7 @@ def boot():
     seen = set()
     while pc < len(lines):
         if pc in seen:
-            return None
+            return
         seen.add(pc)
         op, val = lines[pc]
         if op == 'acc':
@@ -18,7 +18,8 @@ def boot():
             pc += int(val)
         else:
             pc += 1
-    return acc
+    if pc == len(lines):
+        return acc
 
 swap = {'jmp': 'nop', 'nop': 'jmp'}
 for line in lines:
