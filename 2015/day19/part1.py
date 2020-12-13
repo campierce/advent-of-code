@@ -4,7 +4,7 @@ from aocd import get_data
 data = get_data(year=2015, day=19)
 
 lines = data.split('\n')
-m0 = re.findall('[A-Z][a-z]*', lines[-1])
+m0 = re.findall(r'[A-Z][a-z]*', lines[-1])
 expansions = defaultdict(list)
 for x in [x.split(' => ') for x in lines[:-2]]:
     expansions[x[0]].append(x[1])
