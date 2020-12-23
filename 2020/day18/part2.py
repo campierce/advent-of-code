@@ -3,23 +3,22 @@ data = get_data(year=2020, day=18)
 
 mult = lambda x, y: x * y
 addr = lambda x, y: x + y
+
 def evaluate(stack):
-    ans = 1
-    op = mult
+    res, op = 1, mult
     while stack:
         ch = stack.pop()
         if ch == ')':
-            return ans
+            return res
         if ch == '(':
-            ans = op(ans, evaluate(stack))
+            res = op(res, evaluate(stack))
         elif ch == '+':
             op = addr
         elif ch == '*':
-            ans = mult(ans, evaluate(stack))
-            return ans
+            return mult(res, evaluate(stack))
         else:
-            ans = op(ans, int(ch))
-    return ans
+            res = op(res, int(ch))
+    return res
 
 ans = 0
 for line in data.split('\n'):

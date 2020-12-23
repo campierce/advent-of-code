@@ -4,27 +4,23 @@ data = get_data(year=2020, day=14)
 
 lines = data.split('\n')
 
+def collapse(addr):
+    if 'X' not in addr:
+        yield int(addr, 2)
+    else:
+        yield from collapse(addr.replace('X', '0', 1))
+        yield from collapse(addr.replace('X', '1', 1))
+
 mask = None
 mem = {}
 for line in lines:
     op, arg = line.split(' = ')
     if op == 'mask':
-        mask = list(reversed(arg))
+        mask = arg
     else:
-        k = int(op[4:-1])
-        sb = []
-        for i in range(36):
-            if mask[i] == 'X':
-                sb.append('{}')
-            elif (mask[i] == '1' or
-                  k & (1 << i)):
-                sb.append('1')
-            else:
-                sb.append('0')
-
-        s = ''.join(reversed(sb))
-        for t in it.product([0, 1], repeat=mask.count('X')):
-            temp = s.format(*t)
-            mem[int(temp, 2)] = int(arg)
+        temp = str(bin(int(op[4:-1])))[2:].rjust(36, '0')
+        addr = ''.join([t if m == '0' else m for (m, t) in zip(mask, temp)])
+        for permu in collapse(addr):
+            mem[permu] = int(arg)
 
 print(sum(mem.values()))

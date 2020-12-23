@@ -1,22 +1,19 @@
-import re
 from aocd import get_data
 data = get_data(year=2020, day=14)
 
-ans = {}
-for x in data.split('mask = ')[1:]:
-    mask = x[:36]
-    for k, val in re.findall(r'\nmem\[(\d+)\] = (\d+)', x):
-        val = int(val)
-        sb = []
-        for i in range(36):
-            if mask[35-i] != 'X':
-                sb.append(mask[35-i])
-            else:
-                if val & (1 << i):
-                    sb.append('1')
-                else:
-                    sb.append('0')
+lines = data.split('\n')
 
-        ans[k] = int(''.join(reversed(sb)), 2)
+mem = {}
+zmask = omask = None
+for line in lines:
+    op, arg = line.split(' = ')
+    if op == 'mask':
+        zmask = int(arg.replace('X', '0'), 2)
+        omask = int(arg.replace('X', '1'), 2)
+    else:
+        val = int(arg)
+        val |= zmask
+        val &= omask
+        mem[op] = val
 
-print(sum(ans.values()))
+print(sum(mem.values()))
