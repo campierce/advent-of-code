@@ -1,20 +1,20 @@
-import re
-from collections import defaultdict
+from collections import Counter
+from itertools import chain
 from aocd import get_data
 data = get_data(year=2020, day=21)
 
-ing = defaultdict(int)
-agenmap = {}
-for x, y in re.findall(r'([a-z ]+) \(contains ([a-z, ]+)\)', data):
-    x = x.split()
-    for i in x:
-        ing[i] += 1
-    for a in y.split(', '):
-        if a not in agenmap:
-            agenmap[a] = set(x)
+cnt = Counter()
+couldbe = {}
+for line in data.split('\n'):
+    x, y = line.split(' (contains ')
+    ingredients = x.split()
+    allergens = y[:-1].split(', ')
+    cnt.update(ingredients)
+    for a in allergens:
+        if a not in couldbe:
+            couldbe[a] = set(ingredients)
         else:
-            agenmap[a] &= set(x)
+            couldbe[a] &= set(ingredients)
 
-illegal = set()
-illegal = illegal.union(*agenmap.values())
-print(sum([v for k, v in ing.items() if k not in illegal]))
+unsafe = set(chain.from_iterable(couldbe.values()))
+print(sum(v for k, v in cnt.items() if k not in unsafe))

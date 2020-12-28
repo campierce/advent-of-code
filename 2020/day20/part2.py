@@ -1,5 +1,5 @@
-import re
 from collections import defaultdict
+from re import search
 from math import sqrt
 from aocd import get_data
 data = get_data(year=2020, day=20)
@@ -9,8 +9,8 @@ tiles = data.split('\n\n')
 # [left, top, right, bottom]
 def edges(grid):
     grid = grid.split('\n')
-    return [''.join([row[0] for row in grid]), grid[0],
-            ''.join([row[-1] for row in grid]), grid[-1]]
+    return [''.join(row[0] for row in grid), grid[0],
+            ''.join(row[-1] for row in grid), grid[-1]]
 
 def nodir(e):
     return min(e, e[::-1])
@@ -23,7 +23,7 @@ def rotate(grid):
     grid = grid.split('\n')
     new = []
     for c in range(len(grid)):
-        new.append(''.join([row[c] for row in grid][::-1]))
+        new.append(''.join(row[c] for row in grid)[::-1])
     return '\n'.join(new)
 
 def orientations(grid):
@@ -45,7 +45,7 @@ def buildrow():
                 img[-1].append(g)
                 break
 
-def issm(grid, r, c):
+def ismonster(grid, r, c):
     grid = grid.split('\n')
     for dr, dc in SM:
         if grid[r+dr][c+dc] != '#':
@@ -57,9 +57,9 @@ tmap = {}
 edgetotile = defaultdict(list)
 for tile in tiles:
     head, grid = tile.split('\n', 1)
-    tk = int(re.search(r'(\d+)', head)[1])
+    tk = int(search(r'(\d+)', head)[1])
     tmap[tk] = grid
-    for e in [nodir(e) for e in edges(grid)]:
+    for e in (nodir(e) for e in edges(grid)):
         edgetotile[e].append(tk)
 
 # init constants
@@ -72,7 +72,7 @@ SM = ((0, 18),
 seen = set()
 img = [[]]
 for tk, grid in tmap.items():
-    if sum([len(edgetotile[nodir(e)]) for e in edges(grid)]) == 6:
+    if sum(len(edgetotile[nodir(e)]) for e in edges(grid)) == 6:
         seen.add(tk)
         for g in orientations(grid):
             y0, x0 = [nodir(e) for e in edges(g)[:2]]
@@ -102,12 +102,12 @@ for block in img:
     for r in range(1, len(temp[0]) - 1):
         actual.append(''.join([g[r][1:-1] for g in temp]))
 
-# search for SM
+# look for SM
 monsters = 0
 for g in orientations('\n'.join(actual)):
     for r in range(len(actual) - 2):
         for c in range(len(actual) - 19):
-            if issm(g, r, c):
+            if ismonster(g, r, c):
                 monsters += 1
     if monsters:
         break

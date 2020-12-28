@@ -1,29 +1,25 @@
-import re
-from collections import defaultdict
 from aocd import get_data
 data = get_data(year=2020, day=21)
 
-agenmap = {}
-for x, y in re.findall(r'([a-z ]+) \(contains ([a-z, ]+)\)', data):
-    for a in y.split(', '):
-        if a not in agenmap:
-            agenmap[a] = set(x.split())
+couldbe = {}
+for line in data.split('\n'):
+    x, y = line.split(' (contains ')
+    ingredients = x.split()
+    allergens = y[:-1].split(', ')
+    for a in allergens:
+        if a not in couldbe:
+            couldbe[a] = set(ingredients)
         else:
-            agenmap[a] &= set(x.split())
+            couldbe[a] &= set(ingredients)
 
-inv = defaultdict(list)
-for k, v in agenmap.items():
-    for gib in v:
-        inv[gib].append(k)
-
-oo = {}
+pairs = []
 used = set()
-while len(oo) < len(inv):
-    for gib, agen in inv.items():
-        opts = [x for x in agen if x not in used]
-        if len(opts) == 1:
-            oo[gib] = opts[0]
-            used.add(opts[0])
+while len(pairs) < len(couldbe):
+    for a, iset in couldbe.items():
+        opt = iset - used
+        if len(opt) == 1:
+            i = min(opt)
+            pairs.append((a, i))
+            used.add(i)
 
-ans = list(sorted(oo.keys(), key=lambda x: oo[x]))
-print(','.join([x for x in ans]))
+print(','.join(x[1] for x in sorted(pairs)))
