@@ -1,6 +1,5 @@
-import itertools as it
-from aocd import get_data
-data = get_data(year=2020, day=14)
+import aocd
+data = aocd.get_data(year=2020, day=14)
 
 lines = data.split('\n')
 

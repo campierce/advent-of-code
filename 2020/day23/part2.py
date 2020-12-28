@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2020, day=23)
+import aocd
+data = aocd.get_data(year=2020, day=23)
 
 class Node:
     def __init__(self, val=0):

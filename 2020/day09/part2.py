@@ -1,6 +1,6 @@
-from itertools import combinations
-from aocd import get_data
-data = get_data(year=2020, day=9)
+import aocd
+import itertools as it
+data = aocd.get_data(year=2020, day=9)
 
 P1 = 36845998
 nums = [int(x) for x in data.split('\n')]

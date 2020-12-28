@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2020, day=6)
+import aocd
+data = aocd.get_data(year=2020, day=6)
 
 groups = [[set(x) for x in y.split('\n')] for y in data.split('\n\n')]
 ans = 0

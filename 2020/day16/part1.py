@@ -1,6 +1,6 @@
+import aocd
 import re
-from aocd import get_data
-data = get_data(year=2020, day=16)
+data = aocd.get_data(year=2020, day=16)
 
 valid = set()
 temp = re.findall(r'[a-z ]+: (\d+)-(\d+) or (\d+)-(\d+)', data)

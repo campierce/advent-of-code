@@ -1,7 +1,7 @@
-from collections import defaultdict
-from re import search
-from aocd import get_data
-data = get_data(year=2020, day=20)
+import aocd
+import collections
+import re
+data = aocd.get_data(year=2020, day=20)
 
 tiles = data.split('\n\n')
 
@@ -14,10 +14,10 @@ def nodir(e):
     return min(e, e[::-1])
 
 tmap = {}
-edgetotile = defaultdict(list)
+edgetotile = collections.defaultdict(list)
 for tile in tiles:
     head, grid = tile.split('\n', 1)
-    tk = int(search(r'(\d+)', head)[1])
+    tk = int(re.search(r'(\d+)', head)[1])
     tmap[tk] = grid
     for e in (nodir(e) for e in edges(grid)):
         edgetotile[e].append(tk)

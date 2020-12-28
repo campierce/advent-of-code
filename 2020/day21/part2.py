@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2020, day=21)
+import aocd
+data = aocd.get_data(year=2020, day=21)
 
 couldbe = {}
 for line in data.split('\n'):

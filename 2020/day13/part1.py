@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2020, day=13)
+import aocd
+data = aocd.get_data(year=2020, day=13)
 
 lines = data.split('\n')
 time = int(lines[0])

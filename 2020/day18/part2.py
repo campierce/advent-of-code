@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2020, day=18)
+import aocd
+data = aocd.get_data(year=2020, day=18)
 
 mult = lambda x, y: x * y
 addr = lambda x, y: x + y

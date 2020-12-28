@@ -1,6 +1,6 @@
-from copy import deepcopy
-from aocd import get_data
-data = get_data(year=2020, day=11)
+import aocd
+import copy
+data = aocd.get_data(year=2020, day=11)
 
 lines = data.split('\n')
 R = len(lines)
@@ -14,7 +14,7 @@ for r in range(R):
 
 while True:
     stable = True
-    temp = deepcopy(grid)
+    temp = copy.deepcopy(grid)
     for r in range(R):
         for c in range(C):
             if (r, c) in floor:

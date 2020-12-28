@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2020, day=5)
+import aocd
+data = aocd.get_data(year=2020, day=5)
 
 lines = [x for x in data.split('\n')]
 
@@ -21,5 +21,5 @@ for line in lines:
     filled.add(seat)
 
 valid = {x for x in range(min(filled), max(filled) + 1)}
-for x in valid.difference(filled):
+for x in valid - filled:
     print(x)

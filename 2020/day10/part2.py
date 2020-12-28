@@ -1,12 +1,12 @@
-from functools import cache
-from aocd import get_data
-data = get_data(year=2020, day=10)
+import aocd
+import functools as ft
+data = aocd.get_data(year=2020, day=10)
 
 nums = [int(x) for x in data.split('\n')]
 nums.append(0)
 nums.sort()
 
-@cache
+@ft.cache
 def ways_to_connect_from(i):
     if i == len(nums) - 1:
         return 1

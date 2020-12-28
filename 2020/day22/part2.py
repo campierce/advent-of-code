@@ -1,10 +1,10 @@
-from collections import deque
-from aocd import get_data
-data = get_data(year=2020, day=22)
+import aocd
+import collections
+data = aocd.get_data(year=2020, day=22)
 
 px = data.split('\n\n')
-p1 = deque([int(x) for x in px[0].split('\n')[1:]])
-p2 = deque([int(x) for x in px[1].split('\n')[1:]])
+p1 = collections.deque([int(x) for x in px[0].split('\n')[1:]])
+p2 = collections.deque([int(x) for x in px[1].split('\n')[1:]])
 
 def combat(p1, p2):
     seen = set()
@@ -19,8 +19,8 @@ def combat(p1, p2):
         c2 = p2.popleft()
         # get round winner
         if c1 <= len(p1) and c2 <= len(p2):
-            np1 = deque(list(p1)[:c1])
-            np2 = deque(list(p2)[:c2])
+            np1 = collections.deque(list(p1)[:c1])
+            np2 = collections.deque(list(p2)[:c2])
             winner = combat(np1, np2)
         else:
             winner = 1 if c1 > c2 else 2

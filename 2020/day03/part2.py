@@ -1,12 +1,11 @@
-from math import prod
-from aocd import get_data
-data = get_data(year=2020, day=3)
+import aocd
+data = aocd.get_data(year=2020, day=3)
 
 grid = [list(x) for x in data.split('\n')]
 rows, cols = len(grid), len(grid[0])
 deltas = [(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)]
 
-ans = []
+ans = 1
 for dr, dc in deltas:
     r = c = t = 0
     while r < rows:
@@ -14,6 +13,6 @@ for dr, dc in deltas:
             t += 1
         r += dr
         c = (c + dc) % cols
-    ans.append(t)
+    ans *= t
 
-print(prod(ans))
+print(ans)

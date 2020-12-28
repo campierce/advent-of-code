@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2020, day=12)
+import aocd
+data = aocd.get_data(year=2020, day=12)
 
 x = y = 0
 wx, wy = 10, 1

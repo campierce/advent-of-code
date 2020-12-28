@@ -1,8 +1,8 @@
-from collections import defaultdict
-from re import search
-from math import sqrt
-from aocd import get_data
-data = get_data(year=2020, day=20)
+import aocd
+import collections
+import math
+import re
+data = aocd.get_data(year=2020, day=20)
 
 tiles = data.split('\n\n')
 
@@ -54,16 +54,16 @@ def ismonster(grid, r, c):
 
 # build maps
 tmap = {}
-edgetotile = defaultdict(list)
+edgetotile = collections.defaultdict(list)
 for tile in tiles:
     head, grid = tile.split('\n', 1)
-    tk = int(search(r'(\d+)', head)[1])
+    tk = int(re.search(r'(\d+)', head)[1])
     tmap[tk] = grid
     for e in (nodir(e) for e in edges(grid)):
         edgetotile[e].append(tk)
 
 # init constants
-COLS = int(sqrt(len(tmap)))
+COLS = int(math.sqrt(len(tmap)))
 SM = ((0, 18),
       (1, 0), (1, 5), (1, 6), (1, 11), (1, 12), (1, 17), (1, 18), (1, 19),
       (2, 1), (2, 4), (2, 7), (2, 10), (2, 13), (2, 16))
