@@ -25,7 +25,7 @@ for _ in range(100):
         new.append(c)
         if c == dst:
             new.extend(pickup)
-    # update i (current)
+    # update i
     i = (new.index(cups[i]) + 1) % HI
     cups = new
 

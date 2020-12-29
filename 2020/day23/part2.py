@@ -1,6 +1,14 @@
 import aocd
 data = aocd.get_data(year=2020, day=23)
 
+# this is big-O optimized, but it's slow: ~30s
+# keys & vals are hashable so...
+# faster to use dictionary: ~15s
+# keys & vals are ints (ie indices) so...
+# faster yet to use list! ~12s
+# (on my 2019 MBP w/ 4 core i5, 16 GB RAM)
+# see p2v2 for that
+
 class Node:
     def __init__(self, val=0):
         self.val = val
@@ -8,7 +16,7 @@ class Node:
 
 HI = 1000000
 nums = [int(x) for x in data]
-nums.extend([x for x in range(max(nums) + 1, 1000001)])
+nums.extend(x for x in range(max(nums) + 1, 1000001))
 nodes = [None for _ in range(HI + 1)]
 curr = Node()
 for n in nums:
