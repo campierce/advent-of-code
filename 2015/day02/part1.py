@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=2)
+import aocd
+data = aocd.get_data(year=2015, day=2)
 
 dims = [[int(s) for s in line.split('x')] for line in data.split('\n')]
 ans = 0

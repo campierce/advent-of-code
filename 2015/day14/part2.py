@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=14)
+import aocd
+data = aocd.get_data(year=2015, day=14)
 
 speed, move, rest = [], [], []
 lines = [x.split(' ') for x in data.split('\n')]

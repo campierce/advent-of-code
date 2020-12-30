@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=11)
+import aocd
+data = aocd.get_data(year=2015, day=11)
 
 def is_straight(seq, start, end):
     for i in range(start, end):

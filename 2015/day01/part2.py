@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=1)
+import aocd
+data = aocd.get_data(year=2015, day=1)
 
 move = {'(': 1, ')': -1}
 ans = 0

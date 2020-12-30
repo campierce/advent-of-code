@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=8)
+import aocd
+data = aocd.get_data(year=2015, day=8)
 
 lines = data.split('\n')
 literal_chars = 0

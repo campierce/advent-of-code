@@ -1,6 +1,6 @@
+import aocd
 import json
-from aocd import get_data
-data = get_data(year=2015, day=12)
+data = aocd.get_data(year=2015, day=12)
 
 def explore(tree, nums):
     if isinstance(tree, int):

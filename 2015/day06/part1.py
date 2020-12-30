@@ -1,7 +1,7 @@
+import aocd
 import numpy as np
 import re
-from aocd import get_data
-data = get_data(year=2015, day=6)
+data = aocd.get_data(year=2015, day=6)
 
 lines = data.split('\n')
 array = np.zeros((1000, 1000), dtype=int)

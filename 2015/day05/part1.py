@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=5)
+import aocd
+data = aocd.get_data(year=2015, day=5)
 
 lines = data.split('\n')
 vowels = set(['a', 'e', 'i', 'o', 'u'])

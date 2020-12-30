@@ -1,8 +1,8 @@
-from functools import cache
-from aocd import get_data
-data = get_data(year=2015, day=22)
+import aocd
+import functools as ft
+data = aocd.get_data(year=2015, day=22)
 
-@cache
+@ft.cache
 def play(turn, hp, mana, op, shd, psn, chg):
     if turn:
         hp -= 1

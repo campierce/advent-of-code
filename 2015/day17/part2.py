@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=17)
+import aocd
+data = aocd.get_data(year=2015, day=17)
 
 def dfs(v=0, i=0, n=0):
     if v == 150:

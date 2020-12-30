@@ -1,7 +1,7 @@
-from itertools import combinations, product
-from math import ceil
-from aocd import get_data
-data = get_data(year=2015, day=21)
+import aocd
+import itertools as it
+import math
+data = aocd.get_data(year=2015, day=21)
 
 weapons = [[8, 4, 0]
     ,[10, 5, 0]
@@ -22,10 +22,10 @@ rings = [[0, 0, 0]
     ,[20, 0, 1]
     ,[40, 0, 2]
     ,[80, 0, 3]]
-ring_pairs = combinations(rings, 2)
+ring_pairs = it.combinations(rings, 2)
 
 def gear():
-    for g in product(weapons, armor, ring_pairs):
+    for g in it.product(weapons, armor, ring_pairs):
         yield g
 
 def stat(g, i):
@@ -37,7 +37,7 @@ def stat(g, i):
 def p1_wins(p1, ai):
     p1_dpt = max(p1[1] - ai[2], 1)
     ai_dpt = max(ai[1] - p1[2], 1)
-    return ceil(ai[0] / p1_dpt) <= ceil(p1[0] / ai_dpt)
+    return math.ceil(ai[0] / p1_dpt) <= math.ceil(p1[0] / ai_dpt)
 
 def main():
     # ai/p1: [hp, damage, armor]

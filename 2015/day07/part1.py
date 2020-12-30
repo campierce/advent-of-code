@@ -1,8 +1,8 @@
-from functools import cache
-from aocd import get_data
-data = get_data(year=2015, day=7)
+import aocd
+import functools as ft
+data = aocd.get_data(year=2015, day=7)
 
-@cache
+@ft.cache
 def signal(dst):
     if dst not in sources:
         return int(dst)

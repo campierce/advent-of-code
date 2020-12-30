@@ -1,6 +1,6 @@
+import aocd
 import hashlib
-from aocd import get_data
-data = get_data(year=2015, day=4)
+data = aocd.get_data(year=2015, day=4)
 
 i = 1
 while True:

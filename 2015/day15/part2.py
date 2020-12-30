@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=15)
+import aocd
+data = aocd.get_data(year=2015, day=15)
 
 lines = [x.split(' ') for x in data.replace(',', '').split('\n')]
 props = [[int(x[i]) for i in range(2, 11, 2)] for x in lines]

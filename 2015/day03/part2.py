@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=3)
+import aocd
+data = aocd.get_data(year=2015, day=3)
 
 moves = {'^': (1, 0), '>': (0, 1), 'v': (-1, 0), '<': (0, -1)}
 seen = set([(0, 0)])

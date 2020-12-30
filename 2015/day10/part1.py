@@ -1,5 +1,5 @@
-from aocd import get_data
-data = get_data(year=2015, day=10)
+import aocd
+data = aocd.get_data(year=2015, day=10)
 
 def look_and_say(seq, n):
     for _ in range(n):

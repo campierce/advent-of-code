@@ -1,10 +1,10 @@
-from collections import defaultdict
-from itertools import permutations
-from aocd import get_data
-data = get_data(year=2015, day=13)
+import aocd
+import collections
+import itertools as it
+data = aocd.get_data(year=2015, day=13)
 
 lines = [x.split(' ') for x in data.split('\n')]
-graph = defaultdict(dict)
+graph = collections.defaultdict(dict)
 for line in lines:
     src = line[0]
     dst = line[-1][:-1]
@@ -13,7 +13,7 @@ for line in lines:
     graph[src][dst] = sign * units
 
 points = []
-for p in permutations(graph.keys()):
+for p in it.permutations(graph.keys()):
     p2 = p + (p[0],)
     points.append(sum(graph[x][y] + graph[y][x] for x, y in zip(p2, p2[1:])))
 print(max(points))
